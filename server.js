@@ -36,7 +36,7 @@ app.use(session({
 }))
 
 app.use(passport.session()) 
-// app.use(checkLogin)
+
 app.use('/list', (요청, 응답, next) => {
     console.log(new Date())
     next()
@@ -78,14 +78,14 @@ connectDB.then((client)=>{
 
 function checkLogin(요청, 응답, next) {
     if(!요청.user) {
-        응답.send('로그인하세요')
+        응답.redirect('/login');
+        
     }
-    next()
+    else {
+        next()
+    }
 }
-
-app.get('/index', (요청, 응답) => {
-    응답.sendFile(path.join(__dirname, 'index.html'))
-})
+app.use( '/list', checkLogin)
 
 app.get('/',(요청, 응답) => {
     응답.sendFile(__dirname + '/index.html')

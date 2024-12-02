@@ -4,8 +4,12 @@ body {
   .nav {
     display: flex;
     padding: 15px;
+    justify-content: space-between;
     align-items: center;
     background : white;
+  }
+  .nav :nth-last-child(2) {
+    margin-left: auto;
   }
   .nav a {
     margin-right: 10px;

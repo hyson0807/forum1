@@ -85,7 +85,16 @@ function checkLogin(요청, 응답, next) {
         next()
     }
 }
-app.use( '/list', checkLogin)
+app.get('/logout', (요청, 응답, next) => {
+    요청.logout((err) => {
+        if(err) {
+            return 응답.status(500).send("로그아웃 에러");
+        }
+        응답.redirect('/')
+    })
+})
+
+app.use( ['/list', '/write'], checkLogin)
 
 app.get('/',(요청, 응답) => {
     응답.sendFile(__dirname + '/index.html')
@@ -286,7 +295,7 @@ app.post('/login', 아이디비번체크 ,async function(요청, 응답, next) {
         if(!user) return 응답.status(401).json(info.message)
         요청.logIn(user, (err)=> {
             if(err) return next(err)
-            응답.redirect('/')    
+            응답.redirect('/list')    
     })
 
     })(요청, 응답, next)

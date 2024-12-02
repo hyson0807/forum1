@@ -3,6 +3,7 @@
 //npm install express 
 //익스프레스 라이브러리 설치
 const express = require('express')
+const path = require('path')
 const app = express()
 const { MongoClient, ObjectId } = require('mongodb')
 const methodOverride = require('method-override')
@@ -82,6 +83,9 @@ function checkLogin(요청, 응답, next) {
     next()
 }
 
+app.get('/index', (요청, 응답) => {
+    응답.sendFile(path.join(__dirname, 'index.html'))
+})
 
 app.get('/',(요청, 응답) => {
     응답.sendFile(__dirname + '/index.html')

@@ -100,10 +100,7 @@ app.get('/',(요청, 응답) => {
     응답.sendFile(__dirname + '/index.html')
 })
 
-app.get('/news', (요청, 응답) => {
-    // db.collection('post').insertOne({title : '어쩌구'})
-    응답.send('rain22 today')
-})
+
 //콜백 함수 
 app.get('/shop', function(요청, 응답) {
     응답.send('쇼핑페이지 입니다')
@@ -115,9 +112,7 @@ app.get('/list', async function(요청, 응답) {
     응답.render('list.ejs', { 글목록 : result})
 })
 
-app.get('/time', async (요청, 응답)=> {
-    응답.render('time.ejs', {서버시간 : new Date()})
-})
+
 
 app.get('/write', (요청, 응답) => {
     응답.render('write.ejs')
@@ -227,6 +222,8 @@ app.get('/list/next/:id', async function(요청, 응답) {
     
     응답.render('list.ejs', { 글목록 : result})
 })
+
+
 function 아이디비번체크 (요청, 응답, next) {
     if (요청.body.username == '' || 요청.body.password == '') {
       응답.send('그러지마세요')

@@ -309,6 +309,13 @@ app.get('/mypage', async(요청, 응답) => {
 
 app.use('/shop', require('./routes/shop.js'))
 
+app.get('/search', async(요청, 응답) => {
+    console.log(요청.query.val)
+    let result = await db.collection('post')
+    .find({title : {$regex : 요청.query.val}}).toArray()
+    응답.render('search.ejs', {글목록 : result})
+})
+
 
 
 

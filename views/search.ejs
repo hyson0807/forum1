@@ -21,8 +21,7 @@
                 })
             </script>
 
-
-        
+            <h4>검색결과</h4>
 
         <div class="white-bg">
             <% for(let i = 0; i < 글목록.length; i++) { %>
@@ -39,33 +38,10 @@
             <% } %>   
         </div>
         
-        <div class="page">
-            <% for(let i=0; i < 글목록.length; i++) { %>
-                <a href="/list/<%= (i+1) %>"> <%= (i+1) %> </a>
-            <% } %>
-            <br>
-            
-            <a href="/list/next/<%= 글목록[글목록.length-1]._id %>">다음 페이지</a>
-        </div>
-
-
         
 
 
-        <script>
-            document.querySelectorAll('.delete').forEach(function(element) {
-                element.addEventListener('click', function(e) {
-                    fetch('/delete?docid=' + e.target.dataset.id, {
-                        method : 'DELETE'
-                    })
-                    .then((r) => r.text())
-                    .then((r) => { 
-                        e.target.parentElement.parentElement.style.display = 'none'
-                     } )
-
-                })
-            })
-        </script>
+    
       </body>
       
 </html>

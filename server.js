@@ -107,7 +107,9 @@ app.get('/shop', function(요청, 응답) {
 })
 
 app.get('/list', async function(요청, 응답) {
-    let result = await db.collection('post').find().toArray()
+    let result = await db.collection('post').find()
+    .sort({ createdAt: -1})
+    .toArray()
     // 응답.send(result[0].title) 
     응답.render('list.ejs', { 글목록 : result})
 })
@@ -128,12 +130,12 @@ app.post('/add', async(요청, 응답) => {
                     응답.send('제목과 내용 모두 입력해주세요')
                 } else {
                     if(!요청.body.img1) {
-                        await db.collection('post').insertOne( {title : 요청.body.title, content : 요청.body.content})
+                        await db.collection('post').insertOne( {title : 요청.body.title, content : 요청.body.content, createdAt : new Date() })
                     }
                     else {
                         await db.collection('post').insertOne(
                             {
-                               title : 요청.body.title, content : 요청.body.content, img : 요청.file.location
+                               title : 요청.body.title, content : 요청.body.content, img : 요청.file.location, createdAt : new Date()
                             }
                        )
                     }
@@ -177,7 +179,7 @@ app.put('/change', async(요청, 응답) => {
         } 
         else { 
             let result = await db.collection('post').updateOne({ _id : new ObjectId(요청.body.id)}, 
-                {$set : { title : 요청.body.title, content : 요청.body.content}});
+                {$set : { title : 요청.body.title, content : 요청.body.content, img : 요청.file.location, createdAt : new Date() }});
             console.log(result);
             응답.redirect('/list');
         }
@@ -206,8 +208,9 @@ app.delete('/delete', async(요청, 응답) => {
 })
 
 app.get('/list/:id', async(요청, 응답) => {
-    let result = await db.collection('post')
-    .find().skip((요청.params.id - 1)*5)
+    let result = await db.collection('post').find({})
+    .sort({ createdAt: -1})
+    .skip((요청.params.id - 1)*5)
     .limit(5).toArray()
     응답.render('list.ejs', {글목록 : result})
 })
@@ -217,6 +220,7 @@ app.get('/list/:id', async(요청, 응답) => {
 app.get('/list/next/:id', async function(요청, 응답) {
     //1번부터 5번글을 찾아서 result 변수에 저장 
     let result = await db.collection('post')
+    .sort({ createdAt: -1})
     .find({_id : {$gt : new ObjectId(요청.params.id)}})
     .limit(5).toArray()
     

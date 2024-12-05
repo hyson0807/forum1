@@ -10,6 +10,13 @@
     <body class="grey-bg">
         <%- include('nav.ejs') %>
 
+        <form class="search-box" action="/search" method="post">
+            <input name="search" >
+            <button type="submit">find</button>
+
+
+        </form>
+
         <div class="white-bg">
             <% for(let i = 0; i < 글목록.length; i++) { %>
                 <div class="list-box">

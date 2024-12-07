@@ -20,6 +20,7 @@ body {
     justify-content: space-between;
     align-items: center;
     background : white;
+    background-color: lightblue
   }
   .nav :nth-last-child(2) {
     margin-left: auto;
@@ -31,8 +32,16 @@ body {
     font-weight: bold;
   }
 
-  .grey-bg {
-    background: #eee;
+  .river-bg {
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(./media/riverBG.jpg);
+  }
+
+  .main-bg {
+    height: 1300px;
+    
   }
   .white-bg {
     background: white;

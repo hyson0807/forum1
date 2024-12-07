@@ -217,15 +217,35 @@ app.get('/list/:id', async(요청, 응답) => {
 
 
 
+
+
 app.get('/list/next/:id', async function(요청, 응답) {
-    //1번부터 5번글을 찾아서 result 변수에 저장 
-    let result = await db.collection('post')
-    .sort({ createdAt: -1})
-    .find({_id : {$gt : new ObjectId(요청.params.id)}})
-    .limit(5).toArray()
-    
-    응답.render('list.ejs', { 글목록 : result})
-})
+    try {
+        // 요청.params.id가 유효한지 확인
+        if (!ObjectId.isValid(요청.params.id)) {
+            return 응답.status(400).send("잘못된 ID");
+        }
+
+        // 데이터 조회
+        let result = await db.collection('post')
+            .find({ _id: { $gt: new ObjectId(요청.params.id) } })
+            .sort({ createdAt: -1 })
+            .limit(5)
+            .toArray();
+
+        // 결과가 비어있을 경우 처리
+        if (result.length === 0) {
+            return 응답.status(404).send("더 이상 데이터가 없습니다.");
+        }
+
+        // 결과 렌더링
+        응답.render('list.ejs', { 글목록: result });
+    } catch (err) {
+        console.error(err);
+        응답.status(500).send("서버 오류");
+    }
+});
+
 
 
 function 아이디비번체크 (요청, 응답, next) {

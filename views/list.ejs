@@ -7,7 +7,7 @@
     <link href="/main.css" rel="stylesheet">
 
 </head>
-    <body class="grey-bg">
+    <body class="river-bg">
         <%- include('nav.ejs') %>
 
         
@@ -28,7 +28,7 @@
             <% for(let i = 0; i < 글목록.length; i++) { %>
                 <div class="list-box">
                     <h4>
-                        <a href="detail/<%= 글목록[i]._id %>">
+                        <a href="/detail/<%= 글목록[i]._id %>">
                             <%= 글목록[i].title %>
                         </a>
                         <a href="/edit/<%= 글목록[i]._id %>">✏️</a>

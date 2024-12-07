@@ -78,7 +78,7 @@ connectDB.then((client)=>{
 
 function checkLogin(요청, 응답, next) {
     if(!요청.user) {
-        응답.redirect('/login');
+        응답.redirect('/loginpage');
         
     }
     else {
@@ -208,11 +208,27 @@ app.delete('/delete', async(요청, 응답) => {
 })
 
 app.get('/list/:id', async(요청, 응답) => {
-    let result = await db.collection('post').find({})
-    .sort({ createdAt: -1})
-    .skip((요청.params.id - 1)*5)
-    .limit(5).toArray()
-    응답.render('list.ejs', {글목록 : result})
+
+    try {
+        
+        let result = await db.collection('post').find({})
+        .sort({ createdAt: -1})
+        .skip((요청.params.id - 1)*5)
+        .limit(5).toArray()
+        응답.render('list.ejs', {글목록 : result})
+
+        if(result.length == 0) {
+            return 응답.redirect('/list/1')
+        }
+
+    } catch(err) {
+        console.error(err);
+        응답.status(500).send("서버 오류");
+    }
+
+
+
+    
 })
 
 
@@ -305,23 +321,23 @@ passport.use(new LocalStrategy(async (입력한아이디, 입력한비번, cb) =
 
 
 
-app.get('/login', async function(요청, 응답) {
-    console.log(요청.user)
-    응답.render('login.ejs')
-})
+// app.get('/login', async function(요청, 응답) {
+//     console.log(요청.user)
+//     응답.render('login.ejs')
+// })
 
-app.post('/login', 아이디비번체크 ,async function(요청, 응답, next) {
-    passport.authenticate('local', (error, user, info) => {
-        if(error) return 응답.status(500).json(error)
-        if(!user) return 응답.status(401).json(info.message)
-        요청.logIn(user, (err)=> {
-            if(err) return next(err)
-            응답.redirect('/list')    
-    })
+// app.post('/login', 아이디비번체크 ,async function(요청, 응답, next) {
+//     passport.authenticate('local', (error, user, info) => {
+//         if(error) return 응답.status(500).json(error)
+//         if(!user) return 응답.status(401).json(info.message)
+//         요청.logIn(user, (err)=> {
+//             if(err) return next(err)
+//             응답.redirect('/list')    
+//     })
 
-    })(요청, 응답, next)
+//     })(요청, 응답, next)
     
-})
+// })
 
 app.get('/mypage', async(요청, 응답) => {
     if(요청.user != null) {
@@ -339,6 +355,26 @@ app.get('/search', async(요청, 응답) => {
     .find({title : {$regex : 요청.query.val}}).toArray()
     응답.render('search.ejs', {글목록 : result})
 })
+
+app.get('/loginpage', async(요청, 응답) => {
+    
+    응답.render('loginpage.ejs')
+})
+
+app.post('/loginpage', 아이디비번체크 ,async function(요청, 응답, next) {
+    passport.authenticate('local', (error, user, info) => {
+        if(error) return 응답.status(500).json(error)
+        if(!user) return 응답.status(401).json(info.message)
+        요청.logIn(user, (err)=> {
+            if(err) return next(err)
+            응답.redirect('/list/1')    
+    })
+
+    })(요청, 응답, next)
+    
+})
+
+
 
 
 

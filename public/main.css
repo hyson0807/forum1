@@ -22,12 +22,31 @@ body {
     background : white;
     background-color: lightblue
   }
-  .nav :nth-last-child(2) {
+  
+  .nav :nth-last-child(3) {
     margin-left: auto;
   }
   .nav a {
     margin-right: 10px;
   }
+
+  .main-nav {
+    display: flex;
+    padding: 15px;
+    justify-content: space-between;
+    align-items: center;
+    background : white;
+    background-color: lightblue
+  }
+
+  .main-nav :nth-last-child(2) {
+    margin-left: auto;
+  }
+
+  .main-nav a {
+    margin-right: 10px;
+  }
+
   .logo {
     font-weight: bold;
   }

@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
+    <link href="/main.css" rel="stylesheet">
 
-    <h3> <%= 유저정보.username %> </h3>
+</head>
+    <%- include('nav.ejs') %>
+    <body class="river-bg">
+        <h3> 유저 아이디 정보 : <%= 유저정보.username %> </h3>
     
-</body>
+    
+    </body>
 </html>
+

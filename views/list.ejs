@@ -21,7 +21,7 @@
                 })
             </script>
 
-
+            
         
 
         <div class="white-bg">
@@ -41,12 +41,13 @@
         </div>
         
         <div class="page">
-            <% for(let i=0; i < 글목록.length; i++) { %>
+            <% for(let i=0; i < count; i++) { %>
                 <a href="/list/<%= (i+1) %>"> <%= (i+1) %> </a>
             <% } %>
             <br>
             
             <a href="/list/next/<%= 글목록[글목록.length-1]._id %>">다음 페이지</a>
+            
         </div>
 
 

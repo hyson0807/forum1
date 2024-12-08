@@ -206,8 +206,15 @@ app.delete('/delete', async(요청, 응답) => {
     await db.collection('post').deleteOne({ _id : new ObjectId(요청.query.docid)})
     응답.send('삭제 완료')
 })
-
+let count;
 app.get('/list/:id', async(요청, 응답) => {
+    
+    if(요청.params.id == 1) {
+         count  = await db.collection('post').count()
+         count = Math.ceil(count / 5)
+        console.log(count)     
+    }
+    
 
     try {
         
@@ -215,7 +222,7 @@ app.get('/list/:id', async(요청, 응답) => {
         .sort({ createdAt: -1})
         .skip((요청.params.id - 1)*5)
         .limit(5).toArray()
-        응답.render('list.ejs', {글목록 : result})
+        응답.render('list.ejs', {글목록 : result, count : count})
 
         if(result.length == 0) {
             return 응답.redirect('/list/1')
@@ -251,11 +258,11 @@ app.get('/list/next/:id', async function(요청, 응답) {
 
         // 결과가 비어있을 경우 처리
         if (result.length === 0) {
-            return 응답.status(404).send("더 이상 데이터가 없습니다.");
+            return 응답.redirect('/list/1');
         }
 
         // 결과 렌더링
-        응답.render('list.ejs', { 글목록: result });
+        응답.render('list.ejs', { 글목록: result, count : count });
     } catch (err) {
         console.error(err);
         응답.status(500).send("서버 오류");

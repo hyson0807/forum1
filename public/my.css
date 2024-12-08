@@ -1,0 +1,152 @@
+
+body {
+    background-color: linen;
+    
+}
+#header{
+    display: flex;
+    width: 1000px;
+    margin: auto;
+}
+#body1 {
+    display: flex;
+    width: 1000px;
+    margin:auto;
+   
+}
+#body2 {
+    display: flex;
+    width: 1000px;
+    margin:auto;
+}
+#footer {
+    margin: auto;
+    width: 500px;
+    margin-top: 50px;
+    margin-left : 800px
+}
+#footer > span {
+    color: blue;
+    transition: font-size 5s; 
+}
+#footer > span:hover {
+    font-size: 400%;
+}
+
+#div0 {
+    border: 1px solid black;
+    height: 150px;
+    width:500px;
+    box-shadow : 10px 10px 5px skyBlue;
+}
+input[type=text] {
+    color : red;
+    border : 2px solid skyblue;
+    border-radius : 5px;
+}
+input[type=password] {
+    border : 2px solid skyblue;
+    border-radius : 5px;
+}
+#div1 {
+    border: 1px solid black;
+    height: 150px;
+    width: 500px;
+    margin-left: 10px;
+    box-shadow : 10px 10px 5px skyBlue;
+
+
+
+}
+#div1 > div {
+    font-size: 30px;
+    margin-left: 160px;
+    margin-top: 10px;
+    
+}
+.glowEffect{text-shadow: 0px 0px 3px darkblue;}
+
+#div2 {
+    width: 500px;
+    
+    border: 1px solid black;
+    margin-top: 10px;
+    box-shadow : 10px 10px 5px skyBlue;
+
+}
+#div3 {
+    border: 1px solid black;
+    width: 500px;
+    margin-top: 10px;
+    margin-left: 10px;
+    background-size: 100px 100px;
+    background-image: url('/media/spongebob.png');
+    background-repeat: repeat-x repeat-y;
+    background-position: center;
+    box-shadow : 10px 10px 5px skyBlue;
+}
+#div4 {
+    border: 1px solid black;
+    width: 500px;
+    height: 300px;
+    box-shadow : 10px 10px 5px skyBlue;
+    margin-top: 10px;
+
+}
+#div4 > ul {
+    background-color: goldenrod;
+    padding:10px 10px 10px 50px;
+    list-style-image: url("/media/marker.png");
+}
+#div4 > ul > li {
+    background-color: greenyellow;
+    margin-bottom: 5px;
+}
+#div4 > p{
+   
+    width : 163px;
+    height : 30px;
+    padding : 5px;
+    border : 30px solid;
+    border-image: url("./media/border.png") 30 round;
+    font-size: 30px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0;
+
+}
+#div5 {
+    border: 1px solid black;
+    width: 500px;
+    height: 300px;
+    box-shadow : 10px 10px 5px skyBlue;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+
+#float {
+    float : left;
+    border : 1px dotted black;
+    width : 8em;
+    padding : 0.25em;
+    margin : 1em;
+}
+table {
+    border-collapse: collapse;
+}
+td, th {
+    text-align: center;
+    padding: 10px;
+    height: 20px;
+    width: 100px;
+}  
+td {
+    border-bottom: 1px solid rgb(201, 186, 21);
+}
+tbody tr:hover {
+background : pink;
+}
+
+
+hr{border:5px solid yellowgreen;}

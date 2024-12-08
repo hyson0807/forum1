@@ -39,7 +39,7 @@ body {
     background-color: lightblue
   }
 
-  .main-nav :nth-last-child(2) {
+  .main-nav :nth-last-child(3) {
     margin-left: auto;
   }
 

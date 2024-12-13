@@ -3,6 +3,9 @@ body {
     background-color: linen;
     
 }
+
+
+
 #header{
     display: flex;
     width: 1000px;
@@ -34,6 +37,7 @@ body {
 }
 
 #div0 {
+    
     border: 1px solid black;
     height: 150px;
     width:500px;
@@ -150,3 +154,21 @@ background : pink;
 
 
 hr{border:5px solid yellowgreen;}
+
+.btn1 {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  font-family: 'Lato', sans-serif;
+  background: rgb(0,172,238);
+  background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+    7px 7px 20px 0px rgba(0,0,0,.1),
+    4px 4px 5px 0px rgba(0,0,0,.1);
+    
+  line-height: 42px;
+  padding: 0;
+  border: none;
+}

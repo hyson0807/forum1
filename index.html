@@ -1,99 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <link href="/main.css" rel="stylesheet">
-    <link href="/my.css" rel="stylesheet">
-
 </head>
-<body class="river-bg">
+<body>
+    <style>
+        body {
+            background-color: black;
+            height: 6000px;
+            font-family: 'nanumsquare';
+        }
+        div {
+            margin-top: 1000px;
+            color: white;
+            text-align: center;
+            opacity: 0;
+            transition: all 1s;
+            
+        }
+    </style>
 
-    <div class="main-nav">
-        <a class="logo" href="/">메인페이지</a>
-        <a href="/list/1">게시판</a>
-        <a href="/register">회원가입</a>
-        <a href="/loginpage">로그인</a>
-        <a href="/logout">로그아웃</a>
-    </div>
-
-    <div class="main-bg">
-        <div id="header">
-            <div id="div0">
-                <h3>세종대학교 로그인</h3>
-                <hr>
-                <form name="fo" method="post" action="/loginpage">
-                    사용자 ID : <input name="username" size="15" required><br>
-                    사용자 PW : <input name="password" type="password" size="15" required>
-                              <input type="submit" value="전송">
-                </form>
-            </div>
-            <div id="div1">
-                <div class="glowEffect">세종대학교</div>
-                <hr>
-                <ul>
-                    <li> <a href="http://www.sejong.ac.kr/index.htm" target="_black
-                        ">세종대학교 홈페이지</a>
-                    <li> <a href="https://ecampus.sejong.ac.kr/" target="_blank">세종대학교 집현캠퍼스</a>
-                    <li> <a href="https://library.sejong.ac.kr/index.ax" target="_blank">세종대학교 학술정보원</a>
-                </ul>
-            </div>
-            </div>
-    
-        <div id="body1">
-            <div id="div2">
-                <h3>학교 식당 메뉴</h3>
-                <hr>
-                <table>
-                    <tbody>
-                        <tr><td>학생회관</td><td>라면</td><td>비빔밥</td><td>김치찌개</td><td>우동</td><td>카레</td></tr>
-                        <tr><td>군자관</td><td>피자</td><td>파스타</td><td>스테이크</td><td>수프</td><td>빵</td></tr>
-                        <tr><td>진관홀</td><td>에비동</td><td>알밥</td><td>설렁탕</td><td>갈비탕</td><td>된장찌깨</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="div3">
-                <h3>신규 기능</h3>
-                
-            </div>
-        </div>
-    
-        <div id="body2">
-            <div id="div4">
-                <p>오늘의 교훈</p>
-                <hr>
-                <ul>
-                    <li>실패를 두려워하지 말고, 그 경험을 통해 배우고 성장하는 것이 중요합니다.</li>
-                    <li>꾸준한 노력은 시간이 걸리더라도 반드시 보상받게 됩니다.</li>
-                    <li>변화에 적응하고 기회를 찾으면 새로운 가능성이 열립니다.</li>
-                </ul>
-            </div>
-    
-            <div id="div5">
-                <h3>변경사항</h3>
-                <hr>
-                
-                
-                    <li>로그인, 회원가입이 가능합니다</li>
-                    <li>로그인시, 게시판 이용이 가능합니다</li>
-                    <li>글 작성과 수정, 삭제가 가능합니다</li>
-    
-            </div>
-        </div>
-    
-        <div id="footer">
-           <span>20011874 심현성</span>
-        </div>
-    </div>
-
-   
+    <div><h1>웹프로그래밍</h1></div>
+    <div><h1>기말고사</h1></div>
+    <div><h1>웹사이트 만들기</h1></div>
+    <div><a href="/sejong" style="color: white;" font-size: 20px>사이트 입장</a></div>
 
     
 
-   
+    <script>
+        let observer =  new IntersectionObserver((e)=> {
+            e.forEach((박스)=> {
+                if(박스.isIntersecting) {
+                    박스.target.style.opacity = 1;
+                }else {
+                    박스.target.style.opacity = 0;
 
+                }
+            })
+        })
+
+        let div = document.querySelectorAll('div')
+        observer.observe(div[0])
+        observer.observe(div[1])
+        observer.observe(div[2])
+        observer.observe(div[3])
+    </script>
 
 </body>
 </html>

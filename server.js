@@ -100,6 +100,10 @@ app.get('/',(요청, 응답) => {
     응답.sendFile(__dirname + '/index.html')
 })
 
+app.get('/sejong', (요청, 응답) => {
+    응답.render('sejong.ejs')
+})
+
 
 //콜백 함수 
 app.get('/shop', function(요청, 응답) {
@@ -288,7 +292,7 @@ app.post('/register', 아이디비번체크, async(요청, 응답) => {
         username : 요청.body.username, 
         password : 해시 
     })
-    응답.redirect('/')
+    응답.redirect('/list/1')
 })
 
 app.get('/register', (요청, 응답) => {

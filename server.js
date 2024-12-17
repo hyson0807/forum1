@@ -133,7 +133,7 @@ app.post('/add', async(요청, 응답) => {
                 if(요청.body.title == '' || 요청.body.content == '') {
                     응답.send('제목과 내용 모두 입력해주세요')
                 } else {
-                    if(!요청.body.img1) {
+                    if(!요청.file) {
                         await db.collection('post').insertOne( {title : 요청.body.title, content : 요청.body.content, createdAt : new Date() })
                     }
                     else {
@@ -164,6 +164,7 @@ app.get('/detail/:id', async(요청, 응답)=> {
             응답.status(400).send('이상한 url 입력함')
         }
         응답.render('detail.ejs', {result : result})
+        console.log(result)
     } catch(e) {
         console.log(e)
         응답.status(400).send('이상한 url 입력함')
@@ -182,13 +183,16 @@ app.put('/change', async(요청, 응답) => {
             응답.send("내용을 입력해 주세요");
         } 
         else { 
-            let result = await db.collection('post').updateOne({ _id : new ObjectId(요청.body.id)}, 
-                {$set : { title : 요청.body.title, content : 요청.body.content, img : 요청.file.location, createdAt : new Date() }});
-            console.log(result);
-            응답.redirect('/list');
+
+            
+                let result = await db.collection('post').updateOne({ _id : new ObjectId(요청.body.id)}, 
+                {$set : { title : 요청.body.title, content : 요청.body.content, createdAt : new Date() }});
+            
+            
+            응답.redirect('/list/1');
         }
     } catch {
-        console.log(e)
+        
         응답.status(500).send('서버 에러 발생')
     }
 
@@ -292,7 +296,14 @@ app.post('/register', 아이디비번체크, async(요청, 응답) => {
         username : 요청.body.username, 
         password : 해시 
     })
-    응답.redirect('/list/1')
+
+    요청.logout((err) => {
+        if(err) {
+            return 응답.status(500).send("로그아웃 에러");
+        }
+        응답.redirect('/sejong')
+    })
+    // 응답.redirect('/list/1')
 })
 
 app.get('/register', (요청, 응답) => {

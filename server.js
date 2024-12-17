@@ -144,7 +144,7 @@ app.post('/add', async(요청, 응답) => {
                        )
                     }
                     
-                    응답.redirect('/list')
+                    응답.redirect('/list/1')
                 }
             } catch(e) {
                 console.log(e)

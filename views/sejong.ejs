@@ -13,9 +13,16 @@
             <div id="div0">
                 <h3>로그인 후 게시판 이용</h3>            
                 <a class="loginButton" href="/loginpage" >
-                    <button class="btn1">로그인</button>
+                    <button class="btn1" onmouseover="OnMouseIn(this)" onmouseout="OnMouseOut(this)">로그인</button>
                 </a>
             </div>
+
+            <script>
+                function OnMouseIn(elem) {
+                    elem.style.border = "2px solid black"; }
+                function OnMouseOut(elem) { 
+                    elem.style.border = ""; }
+            </script>
 
             <div id="div1">
                 <h3>변경사항</h3>

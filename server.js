@@ -100,8 +100,8 @@ app.get('/',(요청, 응답) => {
     응답.sendFile(__dirname + '/index.html')
 })
 
-app.get('/sejong', (요청, 응답) => {
-    응답.render('sejong.ejs')
+app.get('/main', (요청, 응답) => {
+    응답.render('main.ejs')
 })
 
 
@@ -315,7 +315,7 @@ app.post('/register', 아이디비번체크, async(요청, 응답) => {
         if(err) {
             return 응답.status(500).send("로그아웃 에러");
         }
-        응답.redirect('/sejong')
+        응답.redirect('/main')
     })
     // 응답.redirect('/list/1')
 })

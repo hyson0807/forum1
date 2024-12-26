@@ -133,16 +133,17 @@ app.post('/add', async(요청, 응답) => {
                 if(요청.body.title == '' || 요청.body.content == '') {
                     응답.send('제목과 내용 모두 입력해주세요')
                 } else {
-                    if(!요청.file) {
-                        await db.collection('post').insertOne( {title : 요청.body.title, content : 요청.body.content, createdAt : new Date() })
-                    }
-                    else {
-                        await db.collection('post').insertOne(
-                            {
-                               title : 요청.body.title, content : 요청.body.content, img : 요청.file.location, createdAt : new Date()
-                            }
-                       )
-                    }
+                    
+                        await db.collection('post').insertOne( {
+                            title : 요청.body.title, 
+                            content : 요청.body.content, 
+                            img : 요청.file ? 요청.file.location : '', 
+                            createdAt : new Date(),
+                            user : 요청.user._id,
+                            username : 요청.user.username
+                        })
+                    
+                    
                     
                     응답.redirect('/list/1')
                 }
@@ -172,8 +173,17 @@ app.get('/detail/:id', async(요청, 응답)=> {
 })
 
 app.get('/edit/:id', async(요청, 응답)=> {
-    let result = await db.collection('post').findOne( {_id : new ObjectId(요청.params.id)} )
-    응답.render('edit.ejs', {result : result});
+    let result = await db.collection('post').findOne( {
+        _id : new ObjectId(요청.params.id),
+        user : new ObjectId(요청.user._id)
+    
+    } )
+    if(!result) {
+        응답.send('수정불가')
+    } else {
+        응답.render('edit.ejs', {result : result});
+
+    }
 })
 
 app.put('/change', async(요청, 응답) => {
@@ -211,7 +221,10 @@ app.delete('/delete', async(요청, 응답) => {
     
     console.log(요청.query)
 
-    await db.collection('post').deleteOne({ _id : new ObjectId(요청.query.docid)})
+    await db.collection('post').deleteOne({ 
+        _id : new ObjectId(요청.query.docid),
+        user : new ObjectId(요청.user._id)
+    })
     응답.send('삭제 완료')
 })
 let count;
@@ -230,7 +243,8 @@ app.get('/list/:id', async(요청, 응답) => {
         .sort({ createdAt: -1})
         .skip((요청.params.id - 1)*5)
         .limit(5).toArray()
-        응답.render('list.ejs', {글목록 : result, count : count})
+        응답.render('list.ejs', {글목록 : result, count : count, user : 요청.user._id.toString()})
+        
 
         if(result.length == 0) {
             return 응답.redirect('/list/1')

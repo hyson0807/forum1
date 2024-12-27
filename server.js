@@ -427,7 +427,8 @@ app.post('/comment', async function(요청, 응답) {
         parentId : new ObjectId(요청.body.parentId),
         writerId : new ObjectId(요청.user.id),
         writer : 요청.user.username,
-        content : 요청.body.content
+        content : 요청.body.content,
+        createdAt : dayjs().format('YYYY-MM-DD HH:mm:ss')
     })
 
     응답.redirect('back')

@@ -20,7 +20,7 @@
             <div>
 
                 <% for(let i = 0; i < result2.length; i++) { %>
-                    <p><strong><%= result2[i].writer %></strong> :  <%= result2[i].content %></p>
+                    <p><%= result2[i].createdAt %><strong>   <%= result2[i].writer %></strong> :  <%= result2[i].content %></p>
                 <% } %>
             </div>
             <form action="/comment" method="POST">

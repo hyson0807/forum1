@@ -10,11 +10,24 @@
     <body class="river-bg">
         <%- include('nav.ejs') %>
 
-       
+
         <div class="detail-bg">
             <h4><%= result.title %></h4>
             <p><%= result.content %></p>
             <img src= "<%= result.img ? result.img : '' %>">
+
+            <hr style="margin-top: 60px">
+            <div>
+
+                <% for(let i = 0; i < result2.length; i++) { %>
+                    <p><strong><%= result2[i].writer %></strong> :  <%= result2[i].content %></p>
+                <% } %>
+            </div>
+            <form action="/comment" method="POST">
+              <input name="content">
+              <input name="parentId" value="<%= result._id %>" style="display: none">
+              <button type="submit">댓글작성</button>
+            </form>
         </div> 
         
           

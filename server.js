@@ -161,11 +161,13 @@ app.get('/detail/:id', async(요청, 응답)=> {
 
     try {
         let result = await db.collection('post').findOne({ _id: new ObjectId(요청.params.id)})
+        let result2 = await db.collection('comment').find({
+            parentId :new ObjectId(요청.params.id) }).toArray()
         if(result == null) {
             응답.status(400).send('이상한 url 입력함')
         }
-        응답.render('detail.ejs', {result : result})
-        console.log(result)
+        console.log(result2)
+        응답.render('detail.ejs', {result : result, result2 : result2})
     } catch(e) {
         console.log(e)
         응답.status(400).send('이상한 url 입력함')
@@ -413,6 +415,20 @@ app.post('/loginpage', 아이디비번체크 ,async function(요청, 응답, nex
 
     })(요청, 응답, next)
     
+})
+
+app.post('/comment', async function(요청, 응답) {
+    // console.log(요청.body)
+    console.log(요청.user._id)
+
+    let result = await db.collection('comment').insertOne( {
+        parentId : new ObjectId(요청.body.parentId),
+        writerId : new ObjectId(요청.user.id),
+        writer : 요청.user.username,
+        content : 요청.body.content
+    })
+
+    응답.redirect('back')
 })
 
 

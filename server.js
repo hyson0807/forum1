@@ -305,9 +305,9 @@ function 아이디비번체크 (요청, 응답, next) {
   }
   
 app.post('/register', 아이디비번체크, async(요청, 응답) => {
-    console.log(요청.body)
+    // console.log(요청.body)
     let 해시 = await bcrypt.hash(요청.body.password, 10)
-    console.log(해시)
+    // console.log(해시)
 
     db.collection('user').insertOne({
         username : 요청.body.username, 

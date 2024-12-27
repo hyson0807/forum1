@@ -22,6 +22,8 @@ const LocalStrategy = require('passport-local')
 const { render } = require('ejs')
 const MongoStore = require('connect-mongo')
 
+const dayjs = require('dayjs')
+
 
 app.use(passport.initialize())
 app.use(session({
@@ -38,7 +40,6 @@ app.use(session({
 app.use(passport.session()) 
 
 app.use('/list', (요청, 응답, next) => {
-    console.log(new Date())
     next()
 })
 
@@ -138,7 +139,7 @@ app.post('/add', async(요청, 응답) => {
                             title : 요청.body.title, 
                             content : 요청.body.content, 
                             img : 요청.file ? 요청.file.location : '', 
-                            createdAt : new Date(),
+                            createdAt : dayjs().format('YYYY-MM-DD HH:mm:ss'),
                             user : 요청.user._id,
                             username : 요청.user.username
                         })
@@ -198,7 +199,7 @@ app.put('/change', async(요청, 응답) => {
 
             
                 let result = await db.collection('post').updateOne({ _id : new ObjectId(요청.body.id)}, 
-                {$set : { title : 요청.body.title, content : 요청.body.content, createdAt : new Date() }});
+                {$set : { title : 요청.body.title, content : 요청.body.content, createdAt : dayjs().format('YYYY-MM-DD HH:mm:ss') }});
             
             
             응답.redirect('/list/1');
@@ -312,6 +313,7 @@ app.post('/register', 아이디비번체크, async(요청, 응답) => {
         username : 요청.body.username, 
         password : 해시 
     })
+    
 
     요청.logout((err) => {
         if(err) {
